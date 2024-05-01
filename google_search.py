@@ -1,4 +1,8 @@
 from langchain_google_community import GoogleSearchAPIWrapper
+import os 
+
+os.environ.get("GOOGLE_CSE_ID")
+os.environ.get("GOOGLE_API_KEY")
 
 search = GoogleSearchAPIWrapper()
 
