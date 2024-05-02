@@ -14,14 +14,14 @@ def generate_documents_from_urls(urls: list[str]):
 
 def generate_chunks_from_document_list(docs): 
     text_splitter = CharacterTextSplitter(
-        chunk_size=5000,
+        chunk_size=500,
         chunk_overlap = 100, 
         separator= " "
     )
     chunks = text_splitter.split_documents(docs)
     return chunks 
 
-def select_context_text(docs) -> Chroma: 
+def select_context_text(docs, query) -> Chroma: 
     embedding_function = OllamaEmbeddings(model=MODEL_FOR_EMBEDDING)
     chroma_db = Chroma.from_documents(docs, embedding_function, collection_metadata={"hnsw:space": "cosine"})
     results = chroma_db.similarity_search(query,2)
@@ -34,7 +34,7 @@ def generate_response(query: str) -> str:
     docs = generate_documents_from_urls(urls) 
     chunks = generate_chunks_from_document_list(docs)
     
-    context_text = select_context_text(chunks)
+    context_text = select_context_text(chunks, query)
     prompt = ChatPromptTemplate.from_template("""Answer the following question based only on the provided context:
 
     <context>
