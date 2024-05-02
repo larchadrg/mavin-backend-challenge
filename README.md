@@ -34,6 +34,16 @@ we can now run the app in a local host by using uvicorn. 
 uvicorn main:app
 ```
 
+## Questions Asked
+### How Would I implement Authentication? 
+I would follow the official FastAPI documentation guidance on how to use JSON Web Tokens (JWT) for token-based authentication. Clients will need to provide a valid JWT token in the Authorization header to access the endpoint.
+### How would I scale up the system to support thousands of requests per hour? 
+While FastAPI was created with the idea of building asynchronous apps, this is not the case of ChromaDB and many methods provided by Langchain. Not allowing this behavior is what would make them not scalable. For this usage it is recommended to use a vendor provided vectorbase or deploy it in another server. 
+Also, it is important to note that response time is crucially affected by the model chosen for embeddings and the one chosen for generating a response. For personal experience, it took me 30 minutes to generate a response using Llama 3 on my computer. Although there are more lightweight model alternatives, they start being less precise with the answers, for example Qwen sometimes started answering in chinese, since it was trained mainly with english and chinese sources. 
+### How would I test the app?
+It’s difficult to make unit tests for validating the results of the LLM, since it acts as a blackbox and the answers it can give changes even between executions. Right now, the best way I found to manually evaluate the sources selected and the execution time is by passing them in the response of the API, this way the user can check out how accurate the answer was.
+### How would I implement logging capabilities? 
+If I have to do this task, I was considering that a good idea for doing this would be using a document based database such as MongoDB for storing all the information related to the transactions where the API was involved. The information contained ideally should be: API requests parameters and responses, with their timestamps and response time, and status codes or errors thrown.
 
 ## Sources
 - https://ai.plainenglish.io/building-scalable-large-language-model-llm-apps-509894bc7f6a
