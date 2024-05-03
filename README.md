@@ -7,7 +7,7 @@ The sources for answering the question will be obtained with a web scraping tool
 The technique consists of dividing the documents that act as knowledge sources into smaller chunks, and feeding them into a vector database. Then a query is made to it, asking for chunks with high similarity to our question. The results are then fed into the LLM, and in this way the LLM can give us a more precise answer. 
 
 ## Video
-<iframe width="560" height="315" src="https://www.youtube.com/embed/GozApD2AJog?si=ZdZH0bzSDfF6lmGN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+https://www.youtube.com/embed/GozApD2AJog?si=ZdZH0bzSDfF6lmGN
 
 ## How to Run the Code 
 To run the code we first need to download Ollama and the models that we will run. This can be done in Linux by running the following lines: 
